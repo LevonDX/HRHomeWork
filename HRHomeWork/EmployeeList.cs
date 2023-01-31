@@ -30,5 +30,27 @@ namespace HRHomeWork
         {
             return this.employees.GetEnumerator();
         }
+
+        /// <summary>
+        /// returns employee by ID
+        /// </summary>
+        /// <param name="ID"></param>
+        public Employee Get(int ID)
+        {
+            List<Employee> empls = this.employees.GetByCondition(e => e.ID == ID)
+                .ToList();
+
+            if(empls.Count != 1)
+            {
+                throw new Exception("invalid value for ID");
+            }
+
+            return empls[0];
+        }
+
+        public IEnumerable<Employee> Find(Predicate<Employee> predicate)
+        {
+            return this.employees.GetByCondition(predicate);
+        }
     }
 }

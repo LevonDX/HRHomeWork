@@ -7,7 +7,10 @@
             FileHelper fileHelper = new FileHelper();
             EmployeeList employees = fileHelper.LoadFromFile();
 
-            foreach (Employee item in employees)
+            List<Employee> empls = employees.Find(e => e.Name.Contains('o'))
+                .ToList();
+
+            foreach (Employee item in empls)
             {
                 Console.WriteLine($"{item.ID} {item.Name} {item.Surname}");
             }
